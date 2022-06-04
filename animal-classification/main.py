@@ -24,7 +24,6 @@ def createNewObject():
 
     return [longHair,shortLeg,bark]
 
-
 def insertNewPig():    
     setPigs(createNewObject())
 
