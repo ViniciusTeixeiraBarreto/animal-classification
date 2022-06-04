@@ -13,11 +13,11 @@ model = LinearSVC()
 model.fit(datas, classes)
 
 def testeClassification(model):
-    misterio1 = [1,1,1]
-    misterio2 = [1,1,0]
-    misterio3 = [0,1,1]
+    case1 = [1,1,1]
+    case2 = [1,1,0]
+    case3 = [0,1,1]
 
-    testes = [misterio1,misterio2,misterio3]
+    testes = [case1,case2,case3]
     previsoes = model.predict(testes)
 
     testes_classes = [0,1,1]
@@ -25,24 +25,32 @@ def testeClassification(model):
     taxa_de_acerto = accuracy_score(testes_classes,previsoes)
     print("Taxa de acerto: ",taxa_de_acerto)
 
+def newData(description :str):
+    intValue = None
+    while intValue != 1 and intValue != 0:
+        feature = input(description)
+        try:
+            if int(feature) != 1 and int(feature) != 0:
+                print("2 - O valor digitado deve ser '1' ou '0'")
+            intValue = int(feature)
+        except ValueError:
+            print("1 - O valor digitado deve ser '1' ou '0'")
 
-def insertNewPig():
-    text1 = input("Pelo Longo ?")
-    text2 = input("Perna Curta ?")
-    text3 = input("Late ?")
-        
-    setPigs([text1,text2,text3])
+    return intValue
+    
+def createNewObject():
+    longHair = newData("Pelo Longo ?")
+    shortLeg = newData("Perna Curta ?")
+    bark = newData("Late ?")
+
+    return [longHair,shortLeg,bark]
+
+
+def insertNewPig():    
+    setPigs(createNewObject())
 
 def userClassification(model):
-    text1 = input("Pelo Longo ?")
-    text2 = input("Perna Curta ?")
-    text3 = input("Late ?")
-
-    userInput = [int(text1),int(text2),int(text3)]
-
-    print(userInput)
-
-    resp = model.predict([userInput])
+    resp = model.predict([createNewObject()])
 
     if resp == 1:
         print("É um porco")
