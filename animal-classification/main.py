@@ -1,3 +1,4 @@
+from cgi import test
 from sklearn.metrics import pairwise_distances_argmin
 from sklearn.svm import LinearSVC
 
@@ -32,15 +33,20 @@ classes, datas = getDogs(datas,classes)
 model = LinearSVC()
 model.fit(datas,classes)
 
-animal_misterioso = [1,1,1]
-print(model.predict([animal_misterioso]))
 
 misterio1 = [1,1,1]
 misterio2 = [1,1,0]
 misterio3 = [0,1,1]
 
 teste = [misterio1,misterio2,misterio3]
-print(model.predict(teste))
+previsoes = model.predict(teste)
+
+testes_classes = [0,1,1]
+
+corretos = (previsoes == testes_classes).sum()
+total = len(teste)
+taxa_de_acerto = corretos/total
+print("Taxa de acerto: ",taxa_de_acerto)
 
 
 
