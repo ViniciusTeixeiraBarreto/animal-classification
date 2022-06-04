@@ -1,28 +1,7 @@
-from cgi import test
-from sklearn.metrics import pairwise_distances_argmin
+from sklearn.metrics import accuracy_score, pairwise_distances_argmin
 from sklearn.svm import LinearSVC
-
-def getPigs(features,classes):
-    features.append([0,1,0])
-    features.append([0,1,1])
-    features.append([1,1,0])
-
-    classes.append(1)    
-    classes.append(1)    
-    classes.append(1)        
-
-    return classes,features
-
-def getDogs(features, classes):
-    features.append([0,1,1])
-    features.append([1,0,1])
-    features.append([1,1,1])
-
-    classes.append(0)    
-    classes.append(0)    
-    classes.append(0)    
-
-    return classes,features
+from animals.pigs import get as getPigs
+from animals.dogs import get as getDogs
 
 datas = []
 classes = []
@@ -48,6 +27,9 @@ total = len(teste)
 taxa_de_acerto = corretos/total
 print("Taxa de acerto: ",taxa_de_acerto)
 
+
+taxa_de_acerto = accuracy_score(testes_classes,previsoes)
+print("Taxa de acerto: ",taxa_de_acerto)
 
 
     
