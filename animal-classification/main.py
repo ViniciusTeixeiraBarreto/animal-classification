@@ -6,30 +6,25 @@ from animals.dogs import get as getDogs
 datas = []
 classes = []
 
-classes, datas = getPigs(datas, classes)
-classes, datas = getDogs(datas,classes)
+getPigs(datas, classes)
+getDogs(datas, classes)
 
 model = LinearSVC()
-model.fit(datas,classes)
+model.fit(datas, classes)
 
+def testeClassication(model):
+    misterio1 = [1,1,1]
+    misterio2 = [1,1,0]
+    misterio3 = [0,1,1]
 
-misterio1 = [1,1,1]
-misterio2 = [1,1,0]
-misterio3 = [0,1,1]
+    testes = [misterio1,misterio2,misterio3]
+    previsoes = model.predict(testes)
 
-teste = [misterio1,misterio2,misterio3]
-previsoes = model.predict(teste)
-
-testes_classes = [0,1,1]
-
-corretos = (previsoes == testes_classes).sum()
-total = len(teste)
-taxa_de_acerto = corretos/total
-print("Taxa de acerto: ",taxa_de_acerto)
-
-
-taxa_de_acerto = accuracy_score(testes_classes,previsoes)
-print("Taxa de acerto: ",taxa_de_acerto)
+    testes_classes = [0,1,1]
+    
+    taxa_de_acerto = accuracy_score(testes_classes,previsoes)
+    print("Taxa de acerto: ",taxa_de_acerto)
 
 
     
+testeClassication(model)
