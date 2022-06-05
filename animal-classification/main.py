@@ -4,36 +4,30 @@ from animals.main import getPigAndDogValidator
 
 model = getPigAndDogValidator()
 
-def newData(description :str):
+def validateInput(description :str):
     intValue = None
     while intValue != 1 and intValue != 0:
-        feature = input(description)
+        inputFeature = input(description)
         try:
-            if int(feature) != 1 and int(feature) != 0:
+            if int(inputFeature) != 1 and int(inputFeature) != 0:
                 print("O valor digitado deve ser '1' ou '0'")
-            intValue = int(feature)
+            intValue = int(inputFeature)
         except ValueError:
             print("O valor digitado deve ser '1' ou '0'")
 
     return intValue
     
 def createNewObject():
-    longHair = newData("Pelo Longo ? ")
-    shortLeg = newData("Perna Curta ? ")
-    bark = newData("Late ? ")
+    isLongHair = validateInput("Pelo Longo ? ")
+    isShortLeg = validateInput("Perna Curta ? ")
+    isBark = validateInput("Late ? ")
 
-    return [longHair,shortLeg,bark]
+    return [isLongHair,isShortLeg,isBark]
+  
 
-def insertNewPig():    
-    setPigs(createNewObject())
+resp = model.predict([createNewObject()])
 
-def userClassification(model):
-    resp = model.predict([createNewObject()])
-
-    if resp == 1:
-        print("É um porco")
-    else:
-        print("É um cachorro")
-
-
-userClassification(model)
+if resp == 1:
+    print("É um porco")
+else:
+    print("É um cachorro")

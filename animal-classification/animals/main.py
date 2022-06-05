@@ -3,12 +3,12 @@ from animals.dogs import get as getDogs
 from sklearn.svm import LinearSVC
 
 def getPigAndDogValidator():
-    datas = []
-    classes = []
+    train_x = []
+    train_y = []
 
-    getPigs(datas, classes)
-    getDogs(datas, classes)
+    getPigs(train_x, train_y)
+    getDogs(train_x, train_y)
 
     model = LinearSVC()
-    model.fit(datas, classes)
+    model.fit(train_x, train_y)
     return model
